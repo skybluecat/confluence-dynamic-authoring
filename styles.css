@@ -1,0 +1,97 @@
+/*
+body {
+	background-color: pink;
+	color: blue;
+}
+*/
+.field {
+	position: relative;
+	width: 950px;
+	height: 250px;
+	border: 3px solid #FFF;
+	font-size: 14px;
+	margin:0px;
+}
+
+.character {
+	text-align: center;
+	font-size: 16px;
+	margin: 10px;
+}
+#titleDiv{
+	float : left;
+}
+
+#statusDiv{
+	margin-left : 10px;
+	clear : both;
+}
+
+#actionList_hero_rival{
+	visibility : hidden;
+}
+
+.node {
+	cursor: pointer;
+}
+
+.node circle {
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
+.node text {
+	font: 10px sans-serif;
+}
+.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1.5px;
+}
+
+.link.zero {
+	stroke: darkred;
+}
+.link.one {
+	stroke: red;
+}
+.link.two {
+	stroke: red;
+}
+.link.three {
+	stroke: orangered;
+}
+.link.four {
+	stroke: orange;
+}
+.link.five {
+	stroke: orange;
+}
+.link.six {
+	stroke: greenyellow;
+}
+.link.seven {
+	stroke: green;
+}
+.link.eight {
+	stroke: green;
+}
+.link.nine {
+	stroke: darkgreen;
+}
+
+.link.resolved {
+	stroke-dasharray: 0,2 1;
+}
+
+circle {
+	fill: #ccc;
+	stroke: #333;
+	stroke-width: 1.5px;
+}
+
+text {
+	font: 10px sans-serif;
+	pointer-events: none;
+	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}

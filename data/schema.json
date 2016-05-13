@@ -1,0 +1,96 @@
+{
+  "schema": [
+    {
+      "class": "mood",
+      "isBoolean": false,
+      "directionType": "undirected",
+      "types": [
+        "angry",
+        "scared",
+        "embarrassed",
+        "drunk",
+        "sick",
+        "bored"
+      ],
+      "defaultValue": 10,
+      "minValue": 0,
+      "maxValue": 100,
+      "allowIntent": true
+    },
+    {
+      "class": "relationship",
+      "isBoolean": true,
+      "directionType": "reciprocal",
+      "types": [
+        "friend",
+        "enemy",
+        "married",
+        "sibling"
+      ],
+      "allowIntent": true,
+      "defaultValue": false
+    },
+    {
+      "class": "attitude",
+      "isBoolean": false,
+      "directionType": "directed",
+      "types": [
+        "closeness",
+        "attraction",
+        "suspicion",
+        "aggression"
+      ],
+      "defaultValue": 10,
+      "minValue": 0,
+      "maxValue": 100,
+      "allowIntent": true
+    },
+    {
+      "class": "trait",
+      "isBoolean": true,
+      "directionType": "undirected",
+      "types": [
+        "happy",
+        "timid",
+        "brave",
+        "extrovert",
+        "responsible",
+        "athletic",
+        "funny"
+      ],
+      "allowIntent": true,
+      "defaultValue": false
+    },
+    {
+      "class": "status",
+      "isBoolean": true,
+      "directionType": "undirected",
+      "types": [
+        "present"
+      ],
+      "allowIntent": true,
+      "defaultValue": true
+    },
+    {
+      "class": "inventory",
+      "isBoolean": true,
+      "directionType": "undirected",
+      "types": [
+        "poolcue",
+        "gun",
+        "pill"
+      ],
+      "defaultValue": false,
+      "allowIntent": true
+    },
+    {
+      "class": "SFDBLabelUndirected",
+      "types": ["left"],
+      "isBoolean": true,
+      "directionType": "undirected",
+      "defaultValue": false,
+      "allowIntent": false,
+      "duration": 2
+    }
+  ]
+}

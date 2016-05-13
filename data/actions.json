@@ -1,0 +1,2455 @@
+{
+	"fileName": "actions.json",
+	"actions": [
+		{
+			"name": "CLOSENESS",
+			"intent": {
+				"intentDirection": true,
+				"first": "initiator",
+				"second": "responder",
+				"type": "closeness",
+				"class": "attitude"
+			},
+			"leadsTo": [
+				"CHAT",
+				"TALK",
+				"GIVE_DRINK",
+				"TRICK",
+				"PLAY_POOL"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "AGGRESSION",
+			"intent": {
+				"intentDirection": true,
+				"first": "initiator",
+				"second": "responder",
+				"type": "aggression",
+				"class": "attitude"
+			},
+			"leadsTo": [
+				"INSULT",
+				"THREATEN"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "ATTRACTION",
+			"intent": {
+				"intentDirection": true,
+				"first": "initiator",
+				"second": "responder",
+				"type": "attraction",
+				"class": "attitude"
+			},
+			"leadsTo": [
+				"DANCE"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "BORED",
+			"intent": {
+				"intentDirection": false,
+				"first": "initiator",
+				"type": "bored",
+				"class": "mood"
+			},
+			"leadsTo": [
+				"IDLE",
+				"YELL"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "CHAT",
+			"leadsTo": [
+				"chat_friend1",
+				"chat_friend2",
+				"chat_stranger1",
+				"chat_stranger2",
+				"chat_stranger_into_friend"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "chat_friend1",
+			"displayName": "Chat with your friend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "enemy",
+					"class": "relationship"
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "chat_friend2",
+			"displayName": "Chat with your friend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "enemy",
+					"class": "relationship"
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "chat_stranger1",
+			"displayName": "Chat and befriend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "friend",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "<",
+					"value": 80
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "chat_stranger2",
+			"displayName": "Chat and befriend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "friend",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "<",
+					"value": 80
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "chat_stranger_into_friend",
+			"displayName": "Chat and become friends",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "friend",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": ">",
+					"value": 79
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "INSULT",
+			"leadsTo": [
+				"insult_enemy1",
+				"insult_enemy2",
+				"insult_stranger1",
+				"insult_stranger2",
+				"insult_stranger_into_enemy"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "insult_enemy1",
+			"displayName": "Insult your enemy",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 15
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "friend",
+					"class": "relationship"
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "insult_enemy2",
+			"displayName": "Insult your enemy",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "friend",
+					"class": "relationship"
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "insult_stranger1",
+			"displayName": "Insult an innocent",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "enemy",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "<",
+					"value": 80
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 15
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "insult_stranger2",
+			"displayName": "Insult an innocent",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "enemy",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "<",
+					"value": 80
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "insult_stranger_into_enemy",
+			"displayName": "Insult and become enemies",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"value": false,
+					"type": "enemy",
+					"class": "relationship"
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": ">",
+					"value": 79
+				}
+			],
+			"effects": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "TALK",
+			"leadsTo": [
+				"talk_sibling1",
+				"talk_sibling2",
+				"talk_spouse1",
+				"talk_spouse2"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "talk_sibling1",
+			"displayName": "Talk about family matters",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "sibling",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "talk_sibling2",
+			"displayName": "Talk about family matters",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "sibling",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 15
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "talk_spouse1",
+			"displayName": "Talk about family matters",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "married",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "talk_spouse2",
+			"displayName": "Talk about family matters",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "married",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 25
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "GIVE_DRINK",
+			"leadsTo": [
+				"give_drink_friend1",
+				"give_drink_friend2",
+				"give_drink_enemy1",
+				"give_drink_enemy2"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "give_drink_friend1",
+			"displayName": "Drink with friend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 25
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "give_drink_friend2",
+			"displayName": "Drink with friend",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "give_drink_enemy1",
+			"displayName": "Challenge enemy to drink",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "pill",
+					"class": "inventory"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 15
+				},
+				{
+					"first": "responder",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 30
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "give_drink_enemy2",
+			"displayName": "Challenge enemy to drugged drink",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"type": "pill",
+					"class": "inventory",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "-",
+					"value": 30
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "drunk",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "sick",
+					"class": "mood",
+					"operator": "+",
+					"value": 100
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "DANCE",
+			"leadsTo": [
+				"dance_success1",
+				"dance_success2",
+				"dance_fail1",
+				"dance_fail2"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "dance_success1",
+			"displayName": "Invite to dance",
+			"conditions": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": ">",
+					"value": 50
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "timid",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "dance_success2",
+			"displayName": "Invite to dance",
+			"conditions": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": ">",
+					"value": 50
+				},
+				{
+					"first": "responder",
+					"type": "timid",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 20
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "responder",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 35
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "dance_fail1",
+			"displayName": "Invite to dance",
+			"conditions": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "<",
+					"value": 51
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "timid",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 45
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "dance_fail2",
+			"displayName": "Invite to dance",
+			"conditions": [
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "<",
+					"value": 51
+				},
+				{
+					"first": "responder",
+					"type": "timid",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "attraction",
+					"class": "attitude",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 100
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "PLAY_POOL",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": ">",
+					"value": 0
+				},
+				{
+					"first": "initiator",
+					"type": "poolcue",
+					"class": "inventory",
+					"value": true
+				}
+			],
+			"leadsTo": [
+				"play_pool_success1",
+				"play_pool_success2",
+				"play_pool_fail"
+			],
+			"influenceRules": []
+		},
+		{
+			"name": "play_pool_success1",
+			"displayName": "Play pool",
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "athletic",
+					"class": "trait",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "athletic",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 30
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "play_pool_success2",
+			"displayName": "Play pool",
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "athletic",
+					"class": "trait",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "athletic",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "closeness",
+					"class": "attitude",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "play_pool_fail",
+			"displayName": "Play pool badly",
+			"conditions": [
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "athletic",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 30
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 30
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "TRICK",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "friend",
+					"class": "relationship",
+					"value": true
+				}
+			],
+			"leadsTo": [
+				"trick1",
+				"trick2"
+			],
+			"influenceRules": []
+		},
+		{
+			"name": "trick1",
+			"displayName": "Play scary trick on friend",
+			"conditions": [
+				{
+					"first": "responder",
+					"value": false,
+					"type": "timid",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "trick2",
+			"displayName": "Play scary trick on friend",
+			"conditions": [
+				{
+					"first": "responder",
+					"type": "timid",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "scared",
+					"class": "mood",
+					"operator": "+",
+					"value": 40
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "THREATEN",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				}
+			],
+			"leadsTo": [
+				"threaten_fist",
+				"threaten_gun_success",
+				"threaten_gun_fail"
+			],
+			"influenceRules": []
+		},
+		{
+			"name": "threaten_fist",
+			"displayName": "Threaten with fist",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "gun",
+					"class": "inventory"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "threaten_gun_success",
+			"displayName": "Threaten with gun",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"type": "gun",
+					"class": "inventory",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"type": "timid",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 50
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 100
+				},
+				{
+					"first": "responder",
+					"type": "scared",
+					"class": "mood",
+					"operator": "+",
+					"value": 50
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "threaten_gun_fail",
+			"displayName": "Threaten with gun",
+			"conditions": [
+				{
+					"first": "initiator",
+					"second": "responder",
+					"type": "enemy",
+					"class": "relationship",
+					"value": true
+				},
+				{
+					"first": "initiator",
+					"type": "gun",
+					"class": "inventory",
+					"value": true
+				},
+				{
+					"first": "responder",
+					"value": false,
+					"type": "timid",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				},
+				{
+					"first": "responder",
+					"second": "initiator",
+					"type": "aggression",
+					"class": "attitude",
+					"operator": "+",
+					"value": 100
+				},
+				{
+					"first": "responder",
+					"type": "scared",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "LEAVE",
+			"intent": {
+				"intentDirection": false,
+				"first": "initiator",
+				"type": "present",
+				"class": "status"
+			},
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "present",
+					"class": "status",
+					"value": true
+				}
+			],
+			"leadsTo": [
+				"leave"
+			],
+			"influenceRules": []
+		},
+		{
+			"name": "leave",
+			"displayName": "Leave the party",
+			"effects": [
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "present",
+					"class": "status"
+				},
+				{
+					"first": "initiator",
+					"type": "left",
+					"class": "SFDBLabelUndirected",
+					"value": true
+				}
+			],
+			"conditions": [],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "YELL",
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": ">",
+					"value": 20
+				}
+			],
+			"leadsTo": [
+				"yell1",
+				"yell2"
+			],
+			"influenceRules": []
+		},
+		{
+			"name": "yell1",
+			"displayName": "Yell angrily at everyone",
+			"conditions": [
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "timid",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "yell2",
+			"displayName": "Yell(timidly) at everyone",
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "timid",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "-",
+					"value": 5
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 35
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "IDLE",
+			"leadsTo": [
+				"idle1",
+				"idle2"
+			],
+			"conditions": [],
+			"influenceRules": []
+		},
+		{
+			"name": "idle1",
+			"displayName": "Wait in loneliness",
+			"conditions": [
+				{
+					"first": "initiator",
+					"value": false,
+					"type": "happy",
+					"class": "trait"
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "embarrassed",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "angry",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				},
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 20
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		},
+		{
+			"name": "idle2",
+			"displayName": "Wait idly",
+			"conditions": [
+				{
+					"first": "initiator",
+					"type": "happy",
+					"class": "trait",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"first": "initiator",
+					"type": "bored",
+					"class": "mood",
+					"operator": "+",
+					"value": 10
+				}
+			],
+			"influenceRules": [],
+			"isAccept": true
+		}
+	]
+}

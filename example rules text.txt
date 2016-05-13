@@ -1,0 +1,12 @@
+name:CLOSENESS
+intent: increase initiator,responder closeness
+leads to:CHAT
+
+name: CHAT
+leads to: chat_friend
+
+name: chat_friend, Chat with your friend
+conditions: initiator,responder friend
+effects: if responder not happy: initiator,responder closeness+5; responder,initiator closeness+10; initiator,responder aggression-5; responder,initiator aggression-5; initiator angry-5; initiator bored-5; responder bored+5; initiator,responder not enemy
+effects: if responder happy: initiator,responder closeness+10; responder,initiator closeness+20; initiator,responder aggression-10; responder,initiator aggression-10; initiator angry-10; initiator bored-10; responder bored-5; initiator,responder not enemy
+effects: if initiator,responder closeness =50: initiator,responder closeness +10

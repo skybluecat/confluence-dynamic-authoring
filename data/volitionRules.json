@@ -1,0 +1,268 @@
+{
+	"fileName": "volitionRules",
+	"type": "volition",
+	"rules": [
+		{
+			"name": "Avoid Boredom Rule",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "bored",
+					"first": "someone",
+					"value": 0,
+					"operator": ">"
+				}
+			],
+			"effects": [
+				{
+					"class": "mood",
+					"type": "bored",
+					"first": "someone",
+					"weight": 1,
+					"intentDirection": false,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_10"
+		},
+		{
+			"name": "Everyone wants closeness",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "closeness",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_13"
+		},
+		{
+			"name": "Everyone wants aggression",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "aggression",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_14"
+		},
+		{
+			"name": "Everyone wants Attraction",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "attraction",
+					"first": "someone",
+					"weight": 1,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_15"
+		},
+		{
+			"name": "Friends want to be close",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "friend",
+					"first": "someone",
+					"value": true,
+					"second": "other"
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "closeness",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_16"
+		},
+		{
+			"name": "Enemies want aggression",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "enemy",
+					"first": "someone",
+					"value": true,
+					"second": "other"
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "aggression",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_17"
+		},
+		{
+			"name": "Siblings want to be close",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "sibling",
+					"first": "someone",
+					"value": true,
+					"second": "other"
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "closeness",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_18"
+		},
+		{
+			"name": "Couples want to be close",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "other",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "married",
+					"first": "someone",
+					"value": true,
+					"second": "other"
+				}
+			],
+			"effects": [
+				{
+					"class": "attitude",
+					"type": "closeness",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true,
+					"second": "other"
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_19"
+		}
+	]
+}

@@ -1,0 +1,314 @@
+{
+	"fileName": "triggerRules",
+	"type": "trigger",
+	"rules": [
+		{
+			"name": "Angry characters will leave",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "angry",
+					"first": "someone",
+					"value": 100,
+					"operator": "="
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": false
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_1"
+		},
+		{
+			"name": "Bored characters will leave",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "bored",
+					"first": "someone",
+					"value": 100,
+					"operator": "="
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": false
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_2"
+		},
+		{
+			"name": "Friend Leaving Rule",
+			"conditions": [
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "friend",
+					"first": "someoneElse",
+					"value": true,
+					"second": "someone"
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someoneElse",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "mood",
+					"type": "angry",
+					"first": "someoneElse",
+					"value": 20,
+					"operator": "+"
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_3"
+		},
+		{
+			"name": "Enemy Leaving Rule",
+			"conditions": [
+				{
+					"class": "relationship",
+					"type": "enemy",
+					"first": "someone",
+					"value": true,
+					"second": "someoneElse"
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someoneElse",
+					"value": true
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "mood",
+					"type": "angry",
+					"first": "someone",
+					"value": 10,
+					"operator": "-"
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_4"
+		},
+		{
+			"name": "Drunk character will leave",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "drunk",
+					"first": "someone",
+					"value": 100,
+					"operator": "="
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": false
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_5"
+		},
+		{
+			"name": "Embarrassed character will leave",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "embarrassed",
+					"first": "someone",
+					"value": 100
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": false
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_6"
+		},
+		{
+			"name": "Scared character will leave",
+			"conditions": [
+				{
+					"class": "mood",
+					"type": "scared",
+					"first": "someone",
+					"value": 100
+				},
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": false
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_7"
+		},
+		{
+			"name": "Spouse Leaving Rule",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "married",
+					"first": "someoneElse",
+					"value": true,
+					"second": "someone"
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someoneElse",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "mood",
+					"type": "angry",
+					"first": "someone",
+					"value": 40,
+					"operator": "+"
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_19"
+		},
+		{
+			"name": "Sibling Leaving Rule",
+			"conditions": [
+				{
+					"class": "status",
+					"type": "present",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "relationship",
+					"type": "sibling",
+					"first": "someoneElse",
+					"value": true,
+					"second": "someone"
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "left",
+					"first": "someoneElse",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "mood",
+					"type": "angry",
+					"first": "someone",
+					"value": 30,
+					"operator": "+"
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_20"
+		}
+	]
+}

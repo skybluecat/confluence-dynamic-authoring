@@ -1,0 +1,199 @@
+name:CLOSENESS
+intent: increase initiator,responder closeness
+leads to:CHAT, TALK, GIVE_DRINK, TRICK, PLAY_POOL
+
+name:AGGRESSION
+intent: increase initiator,responder aggression
+leads to: INSULT, THREATEN
+
+name:ATTRACTION
+intent:increase initiator,responder attraction
+leads to: DANCE
+
+name:BORED
+intent:decrease initiator bored
+leads to:IDLE,YELL
+
+name: CHAT
+leads to: chat_friend1,chat_friend2, chat_stranger1, chat_stranger2, chat_stranger_into_friend
+
+name: chat_friend1, Chat with your friend
+conditions: initiator,responder friend; responder not happy
+effects: initiator,responder closeness+5; responder,initiator closeness+10; initiator,responder aggression-5; responder,initiator aggression-5; initiator angry-5; initiator bored-5; responder bored+5; initiator,responder not enemy
+
+name: chat_friend2, Chat with your friend
+conditions: initiator,responder friend; responder happy
+effects: initiator,responder closeness+10; responder,initiator closeness+20; initiator,responder aggression-10; responder,initiator aggression-10; initiator angry-10; initiator bored-10; responder bored-5; initiator,responder not enemy
+
+name: chat_stranger1, Chat and befriend
+conditions: initiator,responder not friend; responder,initiator closeness<80; responder not happy
+effects: responder,initiator closeness+10; initiator,responder closeness+5; initiator bored+5; responder bored+10
+
+name: chat_stranger2, Chat and befriend
+conditions: initiator,responder not friend; responder,initiator closeness<80; responder happy
+effects: responder,initiator closeness+20; initiator,responder closeness+10; responder bored+5
+
+name: chat_stranger_into_friend, Chat and become friends
+conditions: initiator,responder not friend; responder,initiator closeness>79
+effects: responder,initiator closeness+10; initiator,responder closeness+5; initiator,responder aggression-5; responder,initiator aggression-5; initiator,responder friend; initiator angry-5; initiator bored-5; responder bored+5
+
+name:INSULT
+leads to:insult_enemy1,insult_enemy2,insult_stranger1,insult_stranger2,insult_stranger_into_enemy
+
+name:insult_enemy1,Insult your enemy
+conditions:initiator,responder enemy; responder happy
+effects: initiator,responder aggression+10; responder,initiator aggression+10; initiator,responder closeness-10; responder,initiator closeness-15; initiator angry-5; responder bored-5;responder angry+10; initiator,responder not friend
+
+name:insult_enemy2,Insult your enemy
+conditions:initiator,responder enemy; responder not happy
+effects: initiator,responder aggression+10; responder,initiator aggression+20; initiator,responder closeness-10; responder,initiator closeness-30; initiator angry-5; initiator bored-5; responder bored-5;responder angry+20; initiator,responder not friend
+
+name: insult_stranger1, Insult an innocent
+conditions: initiator,responder not enemy; responder,initiator aggression<80; responder happy
+effects: responder,initiator aggression+5; initiator,responder aggression+5; initiator,responder closeness-20; responder,initiator closeness-15; initiator embarrassed+10; initiator angry-5; responder bored+5; responder angry+10
+
+name: insult_stranger2, Insult an innocent
+conditions: initiator,responder not enemy; responder,initiator aggression<80; responder not happy
+effects: responder,initiator aggression+10; initiator,responder aggression+5; initiator,responder closeness-20; responder,initiator closeness-30; initiator embarrassed+5; initiator bored-5; initiator angry-5; responder bored+10; responder angry+20
+
+name: insult_stranger_into_enemy, Insult and become enemies
+conditions: initiator,responder not enemy; responder,initiator aggression>79
+effects: responder,initiator aggression+10; initiator,responder aggression+5; initiator,responder closeness-20; responder,initiator closeness-30; initiator,responder enemy; initiator angry-5; initiator bored-5; responder bored+10;responder angry+20
+
+name: TALK
+leads to: talk_sibling1, talk_sibling2, talk_spouse1, talk_spouse2
+
+name: talk_sibling1, Talk about family matters
+conditions: initiator,responder sibling; responder happy
+effects: initiator angry-5; responder bored+5
+
+name: talk_sibling2, Talk about family matters
+conditions: initiator,responder sibling; responder not happy
+effects: initiator,responder closeness+5; responder,initiator closeness+5; initiator angry+10; initiator bored+10; responder bored+15
+
+name: talk_spouse1, Talk about family matters
+conditions: initiator,responder married; responder happy
+effects: initiator,responder closeness+10; responder,initiator closeness+10; initiator angry-5; responder bored+10
+
+name: talk_spouse2, Talk about family matters
+conditions: initiator,responder married; responder not happy
+effects: initiator,responder closeness-5; responder,initiator closeness-5; initiator angry+20; initiator bored+20; responder bored+25
+
+name:GIVE_DRINK
+leads to: give_drink_friend1, give_drink_friend2, give_drink_enemy1, give_drink_enemy2
+
+name:give_drink_friend1, Drink with friend
+conditions: initiator,responder friend; responder happy
+effects: initiator,responder closeness+10; responder,initiator closeness+10; initiator,responder aggression-10; responder,initiator aggression-10; initiator angry-10; initiator bored-10; initiator drunk+20; responder angry-10;responder bored-10; responder drunk+25
+
+name:give_drink_friend2, Drink with friend
+conditions: initiator,responder friend; responder not happy
+effects: initiator,responder closeness+5; responder,initiator closeness+5; initiator angry-5; initiator bored+5; initiator drunk+10; responder bored+5; responder drunk+20
+
+name:give_drink_enemy1, Challenge enemy to drink
+conditions: initiator,responder enemy; initiator not pill
+yeah don't pick on the grammar, this is not Inform7
+effects: initiator,responder closeness+5; responder,initiator closeness+10; initiator angry-10; responder angry+10; initiator drunk+15; responder drunk+30
+
+name:give_drink_enemy2, Challenge enemy to drugged drink
+conditions: initiator,responder enemy; initiator pill
+effects: initiator,responder closeness-10; responder,initiator closeness-30; responder,initiator aggression+30; initiator angry-10; responder angry+30; initiator drunk+10; responder drunk+10; responder sick+100
+
+name: DANCE
+leads to:dance_success1, dance_success2, dance_fail1, dance_fail2
+
+name: dance_success1, Invite to dance
+conditions: responder,initiator attraction>50; responder not timid
+effects: initiator,responder attraction+10; responder,initiator attraction+10; initiator angry-10; responder angry-10; initiator bored-20; responder bored-20; initiator embarrassed+5
+
+name: dance_success2, Invite to dance
+conditions: responder,initiator attraction>50; responder timid
+effects: initiator,responder attraction+10; responder,initiator attraction+10; initiator angry-10; responder angry-10; initiator bored-20; initiator embarrassed+5; responder embarrassed+35
+
+name: dance_fail1, Invite to dance
+conditions: responder,initiator attraction<51; responder not timid
+effects: initiator,responder attraction+10; responder,initiator attraction-10; initiator angry+10; responder angry+10; responder bored+10; initiator embarrassed+45
+
+name: dance_fail2, Invite to dance
+conditions: responder,initiator attraction<51; responder timid
+effects: initiator,responder attraction+10; responder,initiator attraction-10; initiator angry+10; responder angry+10; responder bored+10; initiator embarrassed+100
+
+name: PLAY_POOL
+conditions: initiator,responder closeness>0; initiator poolcue
+leads to: play_pool_success1, play_pool_success2, play_pool_fail
+
+name: play_pool_success1, Play pool
+conditions: initiator athletic; responder not athletic
+effects: initiator angry-10; initiator bored-10; responder angry+20; responder embarrassed+30
+
+name: play_pool_success2, Play pool
+conditions: initiator athletic; responder athletic
+effects: initiator angry-10; initiator bored-10; responder angry-10; responder bored-10; initiator,responder closeness+10; responder,initiator closeness+10
+
+name: play_pool_fail, Play pool badly
+conditions: initiator not athletic
+effects: initiator angry+30; initiator embarrassed+30; responder angry-10; responder bored-10
+
+name: TRICK
+conditions: initiator,responder friend
+leads to: trick1,trick2
+
+name:trick1, Play scary trick on friend
+conditions: responder not timid
+effects: initiator bored+10; initiator embarrassed+10; responder bored+5
+
+name:trick2, Play scary trick on friend
+conditions: responder timid
+effects: initiator bored-10; initiator embarrassed+10; responder bored-10; responder scared+40
+
+name: THREATEN
+conditions: initiator,responder enemy
+leads to: threaten_fist, threaten_gun_success, threaten_gun_fail
+
+name:threaten_fist, Threaten with fist
+conditions: initiator,responder enemy;initiator not gun
+effects: initiator angry-5; initiator embarrassed+10; responder angry+10; responder,initiator aggression+20; responder embarrassed+10
+
+name:threaten_gun_success, Threaten with gun
+conditions: initiator,responder enemy;initiator gun; responder timid
+effects: initiator angry-5; initiator embarrassed+10; responder angry+50; responder,initiator aggression+100; responder scared+50
+
+name:threaten_gun_fail, Threaten with gun
+conditions: initiator,responder enemy; initiator gun; responder not timid
+effects: initiator angry+5; initiator embarrassed+20; responder angry+20; responder,initiator aggression+100; responder scared+10
+
+name:LEAVE
+intent: decrease initiator present
+conditions: initiator present
+leads to: leave
+
+name:leave, Leave the party
+effects: initiator not present; initiator left
+
+name:YELL
+conditions:initiator bored>20
+leads to:yell1,yell2
+
+name:yell1, Yell angrily at everyone
+conditions: initiator not timid
+effects: initiator angry-5; initiator bored-5; initiator embarrassed+10
+
+name:yell2, Yell(timidly) at everyone
+conditions: initiator timid
+effects: initiator angry-5; initiator bored+10; initiator embarrassed+35
+
+name:IDLE
+leads to: idle1, idle2
+
+name:idle1, Wait in loneliness
+conditions: initiator not happy
+effects: initiator embarrassed+10; initiator angry+10; initiator bored+20
+
+name:idle2, Wait idly
+conditions: initiator happy
+effects: initiator bored+10
+
+
+
+
+

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Party Time!</title>
+    <script src="d3.min.js"></script>
+    <script src="EEVisualize.js"></script>
+    <script data-main="js/common" src="js/require.js"></script>
+    <script src="partytime.js"></script>
+	<script src="rule-generation.js"></script>
+    <script src="js/jquery-2.2.1.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        require(['common'], function () {
+            require(['cif']);
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="container">
+    <div id="statusDiv">
+        <p id="statusMessage">Turn count: 0</p>
+
+        <p id="actionsMessage">An ancient ghost like you deserve more respect than this! Go forth, possess them and make
+            them do things they'll regret!</p>
+    </div>
+
+    <div class="field well" id="manor">
+        <div class="description" id="manorDescription"></div>
+    </div>
+	<div style="position:absolute;top:10px;right:10px; width:270px">
+	<p>edit action rules</p>
+	<textarea id="ruletext" rows="20" cols="30"></textarea>
+	<input type="button" id="updaterules" value="update rules" onclick="parse()" />
+	</div>
+    <div class="text-center">
+        <div class="btn-group" data-toggle="buttons" id="characterSelect">
+             <label class="btn btn-primary active">
+                <input type="radio" name="options" id="eve" autocomplete="off" checked> Eve
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="ann" autocomplete="off"> Ann
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="bob" autocomplete="off"> Bob
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="carlos" autocomplete="off"> Carlos
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="dre" autocomplete="off"> Dre
+            </label>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+
+            <li role="presentation" class="active"><a href="#characters" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
+            <li role="presentation" ><a href="#attitude" aria-controls="profile" role="tab" data-toggle="tab">Attitude</a></li>
+            <li role="presentation" ><a href="#relationships" aria-controls="profile" role="tab" data-toggle="tab">Relationships</a></li>
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane text-center active" id="characters">
+                <h4>Overview</h4>
+            </div>
+            <div role="tabpanel" class="tab-pane text-center" id="attitude">
+                <h4>Attitude</h4>
+            </div>
+            <div role="tabpanel" class="tab-pane text-center" id="relationships">
+                <h4>Relationships</h4>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+
+    var rawSchema;
+    var schema;
+    var rawCast;
+    var cast;
+    var rawTriggerRules;
+    var triggerRules;
+    var rawVolitionRules;
+    var volitionRules;
+    var rawActions;
+    var actions;
+    var rawHistory;
+    var history;
+
+    var storedVolitions;
+
+    var selectedChar = "eve";//the selected tab in the visualization
+	var playerChar = "eve"; //this is the player's possesses person
+	var nextTurn;var possessNewCharacter; //functions needed to possess new person
+	
+	var turnMessageArea=document.getElementById("statusMessage");
+
+    document.addEventListener('cifLoaded', function (e) {
+
+        //Init CiF
+        var loadResult = cif.init();
+        console.log(loadResult);
+
+        //Load in our schema, cast, triggerRules and volitionRules, and actions.
+        rawSchema = cif.loadFile("data/schema.json");
+        schema = cif.loadSocialStructure(rawSchema);
+
+        rawCast = cif.loadFile("data/cast.json");
+
+        /////////////////////////////////
+        //randomizing certain cast attributes
+        /////////////////////////////////
+        //actually we should generate the display field with cast information, or vice-versa?
+        cast = cif.addCharacters(rawCast);
+
+
+        rawTriggerRules = cif.loadFile("data/triggerRules.json");
+        triggerRules = cif.addRules(rawTriggerRules);
+
+        rawVolitionRules = cif.loadFile("data/volitionRules.json");
+        volitionRules = cif.addRules(rawVolitionRules);
+
+        rawActions = cif.loadFile("data/actions.json");
+        actions = cif.addActions(rawActions);
+
+        rawHistory = cif.loadFile("data/history.json");
+        history = cif.addHistory(rawHistory);
+
+        //cif.dumpSFDB();
+
+        //set up stage -- must be done after all loading because display needs character traits
+        var tempdiv;
+        for (var i = 0; i < cast.length; i++) {
+            tempdiv = document.createElement("div");
+            tempdiv.innerHTML = getCharacterName(cast[i]);
+            tempdiv.id = cast[i];
+            manor.appendChild(tempdiv);
+        }
+
+        //Set up our initial state
+        setUpInitialState();
+        setupCharacterDescriptions();
+
+
+        //MAIN GAME LOOP
+        //1.) Calculate Volitions
+        //2.) Populate Action Area
+        //3.) Handle action selection
+        storedVolitions = cif.calculateVolition(cast);
+        //Give the player options for what they can click on!
+        populateActionLists(storedVolitions, cast);
+
+        //Test
+        console.log("The starting volitions: ", storedVolitions.dump());
+
+        cif.dumpSFDB();
+		graphUpdate();
+		
+		turnMessageArea.innerHTML = "Possessing "+getCharacterName(playerChar)+"; turn count: " + gameVariables.turnNumber;
+
+		possessNewCharacter=function()
+		{
+			playerChar=this.name;
+			nextTurn();
+		}
+
+			nextTurn = function () {
+            console.log("We have achieved A NEW TURN!");
+
+            gameVariables.turnNumber += 1;
+            checkForEndConditions();
+            if (gameVariables.gameOver === true) {
+                var endMessageArea = document.getElementById("statusMessage");
+                endMessageArea.innerHTML = gameVariables.endingText;
+            }
+            else {
+                cif.setupNextTimeStep();
+                cif.dumpSFDB();
+                setupCharacterDescriptions();
+                storedVolitions = cif.calculateVolition(cast);
+                populateActionLists(storedVolitions, cast);
+                turnMessageArea = document.getElementById("statusMessage");
+				if((cast.indexOf(playerChar)) == -1)
+				{
+					if(cast.length==0)
+					{
+						checkForEndConditions();
+					}
+					else{
+						console.log(playerChar+" is gone!");
+						turnMessageArea.innerHTML = "Your possessed puppet has left the party! Possess someone else:";
+						for(var i=0;i<cast.length;i++)
+						{
+							var buttonnode= document.createElement('input');
+							buttonnode.setAttribute('type','button');
+							buttonnode.setAttribute('name',cast[i]);
+							buttonnode.setAttribute('value',getCharacterName(cast[i]));
+							buttonnode.onclick = possessNewCharacter;
+							turnMessageArea.appendChild(buttonnode);
+						}
+					}
+				}
+				else
+				{
+					
+					turnMessageArea.innerHTML = "Possessing "+getCharacterName(playerChar)+"; turn count: " +gameVariables.turnNumber; 
+				}
+                
+                graphUpdate();
+            }
+        };
+
+        document.addEventListener("nextTurn", nextTurn);
+
+    }, false);
+	var graphUpdate=function()
+	{
+		$("#characters").empty();
+		loadCharacterTree(cif, selectedChar, "#characters");
+		$("#attitude").empty();
+		loadDirected(cif, "attitude", "closeness", selectedChar, "#attitude");
+		loadDirected(cif, "attitude", "attraction", selectedChar, "#attitude");
+		loadDirected(cif, "attitude", "suspicion", selectedChar, "#attitude");
+		loadDirected(cif, "attitude", "aggression", selectedChar, "#attitude");
+        $("#relationships").empty();
+        loadReciprocal(cif, selectedChar, "#relationships");
+	}
+</script>
+<script>
+    $("#characterSelect :input").change(function() {
+        selectedChar = this.id;
+		if(cast.indexOf(selectedChar)!= -1){graphUpdate();}
+		else{console.log("The selected character is already out of the game!")}
+        
+    });
+</script>
+</body>
+</html>

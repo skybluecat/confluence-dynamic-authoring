@@ -1,0 +1,137 @@
+{
+  "history": [
+    {
+      "pos": 0,
+      "data": [
+        {
+          "class": "relationship",
+          "type": "friend",
+          "first": "carlos",
+          "second": "bob",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "friend",
+          "first": "carlos",
+          "second": "dre",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "friend",
+          "first": "eve",
+          "second": "ann",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "enemy",
+          "first": "eve",
+          "second": "bob",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "enemy",
+          "first": "eve",
+          "second": "dre",
+          "value": true
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "carlos",
+          "second": "eve",
+          "value": 0
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "bob",
+          "second": "ann",
+          "value": 100
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "ann",
+          "second": "bob",
+          "value": 20
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "ann",
+          "second": "carlos",
+          "value": 100
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "carlos",
+          "second": "ann",
+          "value": 100
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "ann",
+          "second": "carlos",
+          "value": 100
+        },
+        {
+          "class": "attitude",
+          "type": "attraction",
+          "first": "eve",
+          "second": "carlos",
+          "value": 95
+        },
+        {
+          "class": "trait",
+          "type": "happy",
+          "first": "carlos",
+          "value": true
+        },
+        {
+          "class": "trait",
+          "type": "timid",
+          "first": "ann",
+          "value": true
+        },
+        {
+          "class": "trait",
+          "type": "extrovert",
+          "first": "dre",
+          "value": true
+        },
+        {
+          "class": "trait",
+          "type": "brave",
+          "first": "eve",
+          "value": true
+        },
+        {
+          "class": "trait",
+          "type": "funny",
+          "first": "bob",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "married",
+          "first": "bob",
+          "second": "ann",
+          "value": true
+        },
+        {
+          "class": "relationship",
+          "type": "sibling",
+          "first": "carlos",
+          "second": "dre",
+          "value": true
+        }
+      ]
+    }
+  ]
+}
